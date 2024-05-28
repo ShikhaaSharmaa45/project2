@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage{
+        stage("checkout"){
             steps{
                 sh 'echo passed'
         //git branch: 'main', url: 'https://github.com/ShikhaaSharmaa45/project2.git'

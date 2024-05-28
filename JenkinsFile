@@ -21,7 +21,7 @@ pipeline{
         }
       }
 }
-        stage('Build and Push Docker Image') {
+        stage('deploy') {
         steps {
             withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
                 sh '''

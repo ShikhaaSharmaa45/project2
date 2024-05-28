@@ -24,16 +24,11 @@ pipeline{
 
 }
         stage("Deployment"){
-      environment {
-        DOCKER = "docker container run -itd -p 7000:80 ${DOCKER_IMAGE}"
-        // DOCKERFILE_LOCATION = "Dockerfile"
-        SERVER_CREDENTIALS = credentials('dockerhost')
-      }
       steps {
-        script {
-            sh "ssh ec2-user@172.31.31.206, ${SERVER_CREDENTIALS} "
-            sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${DOCKER}"
-
+        sshagent(['dockerhost']) {
+            def docker = "docker container run -itd -p 7000:80 ${DOCKER_IMAGE}"
+       // some block
+       sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${docker}"
         }
       }
         }

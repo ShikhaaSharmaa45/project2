@@ -21,16 +21,6 @@ pipeline{
 
         }
       }
-
 }
-stage("Deployment"){
-            steps{
-                sshagent(['docker']){
-                      def docker = "docker container run -itd -p 7000:80 shikha1818/dockerimage:17"
-                   // some block 
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${docker}"
-                  } 
-            }
-        }
     }
 }

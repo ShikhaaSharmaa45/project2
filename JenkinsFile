@@ -16,10 +16,9 @@ pipeline{
       steps {
         script {
             sh 'docker build -t ${DOCKER_IMAGE} .'
-            docker.withRegistry( '', REGISTRY_CREDENTIALS ){
-            dockerImage.push("$BUILD_NUMBER")
-dockerImage.push('latest')
-            }
+            sh 'docker login -u shikha1818 -p ${REGISTRY_CREDENTIALS}'
+            sh 'docker image push ${DOCKER_IMAGE}'
+
         }
       }
 

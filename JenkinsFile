@@ -23,11 +23,11 @@ pipeline{
 }
         stage('deploy') {
         steps {
-            withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
-                sh '''
-                    "docker container run -it -d -p 8000:80 shikha1818/dockerimage:29"
+            sshagent(credentials: ['jenkins']) {
+sh ''
+ "docker container run -it -d -p 8000:80 shikha1818/dockerimage:29"
                 '''
-            }
+}
         }
         }
 

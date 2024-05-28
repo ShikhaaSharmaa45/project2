@@ -9,7 +9,7 @@ pipeline{
         }
         stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "shikha1818/mycodedockerimage:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "shikha1818/dockerimage:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Dockerfile"
         REGISTRY_CREDENTIALS = credentials('shikha1818')
       }

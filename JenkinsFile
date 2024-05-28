@@ -21,15 +21,13 @@ pipeline{
         }
       }
 }
-        stage('deploy') {
+               stage("checkout"){
+      steps {
         steps {
-            sshagent(credentials: ['docker']) {
-sh ''
- "docker container run -it -d -p 8000:80 shikha1818/dockerimage:26"
-                '''
-}
-        }
-        }
+            withCredentials([string(credentialsId: 'docker')]) {
+                sh '''
+      }
+               }
 
     }
 }

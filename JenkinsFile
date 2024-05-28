@@ -7,18 +7,22 @@ pipeline{
         //git branch: 'main', url: 'https://github.com/ShikhaaSharmaa45/project2.git'
             }
         }
-        stage('Build and Test'){
-          environment {
-imagename = "shikha1818/dockerimage"
-registryCredential = 'shikha1818'
-dockerImage = ''
-}
-script {
-docker.withRegistry( '', registryCredential ) {
-dockerImage.push("$BUILD_NUMBER")
+        stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "shikha1818/mycodedockerimage:${BUILD_NUMBER}"
+        // DOCKERFILE_LOCATION = "Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('shikha1818')
+      }
+      steps {
+        script {
+            sh 'cd spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+            docker.withRegistry( '', REGISTRY_CREDENTIALS ){
+            dockerImage.push("$BUILD_NUMBER")
 dockerImage.push('latest')
-}
-}
+            }
         }
+      }
+
+}
     }
 }

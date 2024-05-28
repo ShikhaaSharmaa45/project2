@@ -18,18 +18,11 @@ pipeline{
             sh 'docker build -t ${DOCKER_IMAGE} .'
             sh 'docker login -u shikha1818 -p shikha18nov '
             sh 'docker image push ${DOCKER_IMAGE}'
+            sh 'docker container run -it -d -p 7000:80 ${DOCKER_IMAGE}'
         }
 
       }
-   stage("checkout"){
-      steps {
-sshagent(['docker']) {
-def docker = "docker container run -itd -p 7000:80 ${DOCKER_IMAGE}"
-    // some block
-sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${docker}"
-}
-      }
-   }
+
         }
     }
 }

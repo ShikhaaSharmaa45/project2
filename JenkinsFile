@@ -23,14 +23,14 @@ pipeline{
       }
 
 }
-        stage("Deployment"){
-      steps {
-        sshagent(['dockerhost']) {
-            def docker = "docker container run -itd -p 7000:80 ${DOCKER_IMAGE}"
-       // some block
-       sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${docker}"
-        }
-      }
+stage("Deployment"){
+            steps{
+                sshagent(['dockerhost']){
+                      def docker = "docker container run -itd -p 7000:80 ${DOCKER_IMAGE}"
+                   // some block 
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.206 ${docker}"
+                  } 
+            }
         }
     }
 }

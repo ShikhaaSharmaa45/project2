@@ -27,6 +27,8 @@ pipeline{
                 sh '''
                     "docker container run -it -d -p 8000:80 shikha1818/dockerimage:29"
                 '''
+            }
+        }
         }
 
     }
